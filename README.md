@@ -3,5 +3,5 @@
 ## Getting Started
 
 ```
-npx degit colbyfayock/demo-react-form my-react-file-upload
+npx degit colbyfayock/demo-react-form-starter my-react-file-upload
 ```
