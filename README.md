@@ -1,7 +1,7 @@
-# Demo React Form
+# Demo Uploader des fichiers avec React
 
-## Getting Started
+📝 Article: https://kdta.io/b0WwW
 
-```
-npx degit colbyfayock/demo-react-form-starter my-react-file-upload
-```
+📺 YouTube: https://www.youtube.com/watch?v=8uChP5ivQ1Q
+
+🚀 Demo: https://my-react-file-upload.vercel.app/
