@@ -16,6 +16,7 @@
 Sur la page Contact, il y a un formulaire dans lequel nous allons ajouter une nouvelle entrée (une nouvelle balise <input>) entre le message et le boutton d'envoi.
 ```
 <input id="image" type="file" name="image" />
+```
 
 Une fois que c'est fait, vous devriez voir apparaitre un bouton d'ajout de fichier qui permet de choisir d'uploader un fichier depuis votre machine.
 
