@@ -237,17 +237,27 @@ Dans notre fonction de rappel, nous obtenons acceptedFiles qui nous permet d'acc
 Ensuite, nous devons transmettre cette fonction onDrop à useDropzone :
 
 ```ts
-const { getRootProps, getInputProps, isDragActive } = useDropzone({
-  onDrop,
+const { acceptedFiles, getRootProps, getInputProps, isDragActive } = useDropzone({
+  onDrop
 });
 ```
 
 Et maintenant, lorsque nous faisons glisser notre fichier, nous pouvons le voir se mettre à jour avec un aperçu !
 
+```ts
+if ( typeof acceptedFiles[0] === 'undefined' ) return;
+
+const formData = new FormData();
+
+formData.append('file', acceptedFiles[0]);
+formData.append('upload_preset', '<Your Upload Preset>');
+formData.append('api_key', import.meta.env.VITE_CLOUDINARY_API_KEY);
+```
+
 ## Sources et aides
 
-📝 Article: https://kdta.io/b0WwW
+📝 Article: <https://kdta.io/b0WwW>
 
-📺 YouTube: https://www.youtube.com/watch?v=8uChP5ivQ1Q
+📺 YouTube: <https://www.youtube.com/watch?v=8uChP5ivQ1Q>
 
-🚀 Demo: https://my-react-file-upload.vercel.app/
+🚀 Demo: <https://my-react-file-upload.vercel.app/>
