@@ -168,7 +168,7 @@ Et maintenant, ajoutons une nouvelle image en dessous de notre input de fichier 
     <p>
       <img src={preview as string} alt="Aperçu du téléchargement" />
     </p>
-  );
+  )
 }
 ```
 
