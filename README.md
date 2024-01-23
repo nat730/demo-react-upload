@@ -26,7 +26,7 @@ Une fois que c'est fait, vous devriez voir apparaitre un bouton d'ajout de fichi
 
 Pour pouvoir manipuler notre fichier, nous allons faire un état (state). Il faudra donc faire un apport de useState et ensuite créer notre variable
 
-```js
+```ts
 import { useState } from 'react';
 
 [...]
@@ -36,11 +36,11 @@ const [file, setFile] = useState<File | undefined>();
 
 Nous pouvons ensuite mettre en place une nouvelle fonction que nous appellerons handleOnChange et que nous utiliserons pour écouter les modifications de notre champ de formulaire et enregistrer la valeur :
 
-```js
+```ts
 function handleOnChange(e: React.FormEvent<HTMLInputElement>) {
   const target = e.target as HTMLInputElement & {
     files: FileList;
-  }
+  };
 
   setFile(target.files[0]);
 }
@@ -50,7 +50,7 @@ Ici, nous utilisons e.target qui sera notre champ de formulaire à partir de l'�
 
 Enfin, nous pouvons configurer notre champ de formulaire pour déclencher cette fonction lorsqu'il est modifié :
 
-```jsx
+```ts
 <input id="image" type="file" name="image" onChange={handleOnChange} />
 ```
 
@@ -134,38 +134,42 @@ Nous utiliserons l'API FileReader pour cela et enregistrerons une version d'aper
 
 Tout d'abord, créons une nouvelle instance de state où nous stockerons cet aperçu :
 
-```jsx
-const [preview, setPreview] = (useState < string) | ArrayBuffer | (null > null);
+```ts
+const [preview, setPreview] = useState<string | ArrayBuffer | null>(null);
 ```
 
 Nos valeurs potentielles sont une chaîne de caractères, un ArrayBuffer ou null (valeur par défaut), nous voulons donc nous assurer qu'elle est correctement typée.
 
 Ensuite, mettons à jour la fonction handleOnChange pour lire notre fichier :
 
-```jsx
+```ts
 function handleOnChange(e: React.FormEvent<HTMLInputElement>) {
   const target = e.target as HTMLInputElement & {
     files: FileList;
-  }
+  };
 
   setFile(target.files[0]);
 
-  const file = new FileReader;
+  const file = new FileReader();
 
-  file.onload = function() {
+  file.onload = function () {
     setPreview(file.result);
-  }
+  };
 
-  file.readAsDataURL(target.files[0])
+  file.readAsDataURL(target.files[0]);
 }
 ```
 
 Et maintenant, ajoutons une nouvelle image en dessous de notre input de fichier qui ne s'affiche que lorsque cet aperçu est disponible :
 
-```jsx
-{preview && (
-  <p><img src={preview as string} alt="Aperçu du téléchargement" /></p>
-)}
+```ts
+{
+  preview && (
+    <p>
+      <img src={preview as string} alt="Aperçu du téléchargement" />
+    </p>
+  );
+}
 ```
 
 Si nous chargeons maintenant notre application et sélectionnons un fichier, nous devrions voir notre image !
@@ -182,20 +186,20 @@ npm install react-dropzone
 
 Ensuite, importez les dépendances dans votre page :
 
-```jsx
+```ts
 import { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 ```
 
 Ici, nous importons également le useCallback de React que nous utiliserons comme recommandé pour envelopper nos fonctions de rappel pour Dropzone. Pour commencer à utiliser Dropzone, invoquez d'abord le hook useDropzone :
 
-```jsx
+```ts
 const { getRootProps, getInputProps, isDragActive } = useDropzone();
 ```
 
 Et ensuite, nous voulons remplacer notre input de fichier existant par l'interface utilisateur de React Dropzone :
 
-```jsx
+```ts
 <div {...getRootProps()}>
   <input {...getInputProps()} />
   {isDragActive ? (
@@ -216,7 +220,7 @@ Si nous ouvrons notre application, nous pouvons voir le texte, qui n'est pas tr�
 
 Tout d'abord, créons notre callback onDrop :
 
-```jsx
+```ts
 const onDrop = useCallback((acceptedFiles: Array<File>) => {
   const file = new FileReader();
 
@@ -232,7 +236,7 @@ Dans notre fonction de rappel, nous obtenons acceptedFiles qui nous permet d'acc
 
 Ensuite, nous devons transmettre cette fonction onDrop à useDropzone :
 
-```jsx
+```ts
 const { getRootProps, getInputProps, isDragActive } = useDropzone({
   onDrop,
 });
